@@ -1,5 +1,5 @@
 ---
-- name: update web and nfs aservers
+- name: update web and nfs servers
   hosts: webservers, nfs
   remote_user: ec2-user
   become: yes
@@ -10,8 +10,10 @@
         name: wireshark
         state: latest
 
-- name: update LB server
-  hosts: lb, db
+# ------------------------------------------------------------------
+
+- name: update DB server
+  hosts: db
   remote_user: ubuntu
   become: yes
   become_user: root
@@ -25,23 +27,5 @@
         name: wireshark
         state: latest
 
-- name: For all servers
-  hosts: all
-  remote_user: root
-  become: yes
-  tasks:
-  
-    - name: Create a directory
-      ansible.builtin.file:
-        path: /etc/tmp/myshell
-        state: directory
-        mode: '0777'
 
-    - name: Create a file
-      ansible.builtin.file:
-        path: /etc/tmp/myshell/new_file.sh
-        state: touch
-        mode: '0777'
-        
-    - name: Execute a script
-      script: /etc/tmp/myshell/new_file.sh
+  
