@@ -1,5 +1,5 @@
 # ansible-config-mgt
 
-Ansible build triggered with save_artifacts
+Working on Ansible again
 
-Another Project taking place this morning again
+Presently working on Ansible build triggered with save_artifacts
