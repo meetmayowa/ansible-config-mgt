@@ -1,0 +1,13 @@
+---
+- name: looping through list of available files
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - stage.yml
+        - dev.yml
+        - prod.yml
+        - uat.yml
+      paths:
+        - "../env-vars"
+  tags:
+    - always
