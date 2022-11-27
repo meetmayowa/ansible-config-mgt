@@ -1,4 +1,16 @@
 ---
+- name: install ngnix
+  become: true
+  apt:
+    name: nginx
+    state: present
+
+- name: Start nginx service, if not started
+  become: true
+  service:
+    name: nginx
+    state: started
+    
 # Variable setup.
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
@@ -10,7 +22,7 @@
 
 # Setup/install tasks.
 - include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Rocky'
+  when: ansible_os_family == 'RedHat'
 
 - include_tasks: setup-Ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
